@@ -7,15 +7,22 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ImageObj } from './ImageGallery';
+import { useState } from 'react';
 
 export type ImageCardProps = {
 	imageData: ImageObj;
 };
 
-export default function ImageCard({imageData} : ImageCardProps) {
+export default function ImageCard({ imageData }: ImageCardProps) {
+	const [imageLoaded, setImageLoaded] = useState<boolean>(false);
+
+	const handleImageLoad = () => {
+		setImageLoaded(true);
+	};
+
 	return (
 		<div className='rounded overflow-hidden shadow-lg relative max-w-xs h-fit-content'>
-			<div className=' px-2 py-2 bg-white bg-opacity-70 w-full flex justify-between'>
+			<div className='px-2 py-2 bg-white bg-opacity-70 w-full flex justify-between'>
 				<div>
 					<FontAwesomeIcon icon={faEye} />
 					<span className='ml-2'>{imageData.views}</span>
@@ -25,8 +32,24 @@ export default function ImageCard({imageData} : ImageCardProps) {
 					<span className='ml-2'>{imageData.downloads}</span>
 				</div>
 			</div>
-			<a href={imageData.pageURL}>
-				<img src={imageData.webformatURL} alt='Image' className='max-w-full' />
+			<a href={imageData.pageURL} className='relative'>
+				{!imageLoaded && (
+					<div
+						className='bg-white flex justify-between items-center max-w-full'
+						style={{
+							height: imageData.webformatHeight,
+							width: imageData.webformatWidth,
+						}}>
+						<p className='text-center w-full'>Loading ...</p>
+					</div>
+				)}
+
+				<img
+					src={imageData.webformatURL}
+					alt='Image'
+					className={`max-w-full ${imageLoaded ? '' : 'hidden'}`}
+					onLoad={handleImageLoad}
+				/>
 			</a>
 			<div className='flex px-2 py-2'>
 				<div className='flex items-center gap-2'>
