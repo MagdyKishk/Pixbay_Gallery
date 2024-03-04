@@ -23,7 +23,6 @@ function App() {
 
   useEffect(() => {
     getData();
-    console.log(images)
 	}, [term, imageCount]);
 
 	function getData() {
