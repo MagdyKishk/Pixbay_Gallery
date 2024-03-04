@@ -6,21 +6,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ImageObj } from './ImageGallery';
 
-type ImageCardProps = {
-	imageData: {
-		webformatURL: string;
-		downloads: number;
-		likes: number;
-		views: number;
-		user: string;
-		pageURL: string;
-		tags: string;
-        userImageURL: string;
-	};
+export type ImageCardProps = {
+	imageData: ImageObj;
 };
 
-export default function ImageCard({ imageData }: ImageCardProps) {
+export default function ImageCard({imageData} : ImageCardProps) {
 	return (
 		<div className='rounded overflow-hidden shadow-lg relative max-w-xs h-fit-content'>
 			<div className=' px-2 py-2 bg-white bg-opacity-70 w-full flex justify-between'>
