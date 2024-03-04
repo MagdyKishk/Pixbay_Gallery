@@ -21,7 +21,7 @@ export default function ImageCard({ imageData }: ImageCardProps) {
 	};
 
 	return (
-		<div className='rounded overflow-hidden shadow-lg relative max-w-xs h-fit-content'>
+		<div className='rounded overflow-hidden shadow-lg relative max-w-xs h-fit-content bg-white mb-2'>
 			<div className='px-2 py-2 bg-white bg-opacity-70 w-full flex justify-between'>
 				<div>
 					<FontAwesomeIcon icon={faEye} />

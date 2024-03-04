@@ -48,10 +48,10 @@ function App() {
 	}
 
 	return (
-		<>
-			<SearchBar Search={Search} />
+		<div className='bg-gray-100 min-h-dvh'>
+			<SearchBar Search={Search} term={term} />
 			<ImageGallery isLoading={isLoading} isEmpty={isEmpty} images={images} />
-		</>
+		</div>
 	);
 }
 
