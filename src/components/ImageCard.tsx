@@ -7,7 +7,7 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ImageObj } from './ImageGallery';
-import { useEffect, useReducer, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export type ImageCardProps = {
 	imageData: ImageObj;
@@ -15,20 +15,25 @@ export type ImageCardProps = {
 
 export default function ImageCard({ imageData }: ImageCardProps) {
 	const [imageLoaded, setImageLoaded] = useState<boolean>(false);
-	const ImageCardElement = useRef(null);
-	const ImageElement = useRef(null);
+	const ImageCardElement = useRef<HTMLDivElement>(null);
+	const ImageElement = useRef<HTMLImageElement>(null);
 
 	const handleImageLoad = () => {
 		setImageLoaded(true);
 	};
-
 	useEffect(() => {
 		if (ImageCardElement.current && ImageElement.current) {
 			const observer = new IntersectionObserver(
 				(entries) => {
 					entries.forEach((entry) => {
 						if (entry.isIntersecting) {
-							ImageElement.current.src = imageData.webformatURL;
+							if (ImageElement.current) {
+								ImageElement.current.src = imageData.webformatURL;
+							}
+						} else {
+							if (ImageElement.current) {
+								ImageElement.current.src = '';
+							}
 						}
 					});
 				},
@@ -39,12 +44,12 @@ export default function ImageCard({ imageData }: ImageCardProps) {
 				}
 			);
 			observer.observe(ImageCardElement.current);
+
 			return () => {
 				observer.disconnect();
 			};
 		}
-	}, [ImageCardElement]);
-
+	}, [ImageCardElement, ImageElement, imageData.webformatURL]);
 	return (
 		<div
 			ref={ImageCardElement}
@@ -78,9 +83,7 @@ export default function ImageCard({ imageData }: ImageCardProps) {
 						height: imageData.webformatHeight * (2 / 3),
 						width: imageData.webformatWidth,
 					}}
-					className={`w-xs mx-auto object-cover ${
-						imageLoaded ? '' : 'hidden'
-					}`}
+					className={`w-xs mx-auto object-cover ${imageLoaded ? '' : 'hidden'}`}
 					onLoad={handleImageLoad}
 				/>
 			</a>
