@@ -11,9 +11,10 @@ import { useEffect, useRef, useState } from 'react';
 
 export type ImageCardProps = {
 	imageData: ImageObj;
+	imageCardWidth: number;
 };
 
-export default function ImageCard({ imageData }: ImageCardProps) {
+export default function ImageCard({ imageData, imageCardWidth }: ImageCardProps) {
 	const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 	const ImageCardElement = useRef<HTMLDivElement>(null);
 	const ImageElement = useRef<HTMLImageElement>(null);
@@ -53,8 +54,9 @@ export default function ImageCard({ imageData }: ImageCardProps) {
 	return (
 		<div
 			ref={ImageCardElement}
-			className='rounded shadow-lg relative max-w-xs overflow-hidden h-fit-content bg-white mb-2'>
-			<div className='px-2 py-2 bg-white bg-opacity-70 w-full flex justify-between'>
+			style={{ width: imageCardWidth }}
+			className='rounded shadow-lg overflow-hidden h-fit-content bg-white mb-2 relative mx-auto'>
+			<div className='px-2 py-2 bg-white w-full flex justify-between'>
 				<div>
 					<FontAwesomeIcon icon={faEye} />
 					<span className='ml-2'>{imageData.views}</span>
@@ -67,23 +69,24 @@ export default function ImageCard({ imageData }: ImageCardProps) {
 			<a href={imageData.pageURL} className='relative'>
 				{!imageLoaded && (
 					<div
-						className='bg-white flex justify-between items-center max-w-xs min-w-xs'
+						className='bg-white flex justify-between items-center max-w-xs'
 						style={{
 							height: imageData.webformatHeight * (2 / 3),
 						}}>
 						<p className='text-center w-full'>Loading ...</p>
 					</div>
 				)}
-
 				<img
 					ref={ImageElement}
 					src=''
-					alt='Image'
+					alt={imageData.tags}
 					style={{
 						height: imageData.webformatHeight * (2 / 3),
 						width: imageData.webformatWidth,
 					}}
-					className={`w-xs mx-auto object-cover ${imageLoaded ? '' : 'hidden'}`}
+					className={`max-w-xs mx-auto object-cover w-full ${
+						imageLoaded ? '' : 'hidden'
+					}`}
 					onLoad={handleImageLoad}
 				/>
 			</a>
