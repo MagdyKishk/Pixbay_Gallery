@@ -7,7 +7,7 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ImageObj } from './ImageGallery';
-import { useState } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 
 export type ImageCardProps = {
 	imageData: ImageObj;
@@ -15,13 +15,40 @@ export type ImageCardProps = {
 
 export default function ImageCard({ imageData }: ImageCardProps) {
 	const [imageLoaded, setImageLoaded] = useState<boolean>(false);
+	const ImageCardElement = useRef(null);
+	const ImageElement = useRef(null);
 
 	const handleImageLoad = () => {
 		setImageLoaded(true);
 	};
 
+	useEffect(() => {
+		if (ImageCardElement.current && ImageElement.current) {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							ImageElement.current.src = imageData.webformatURL;
+						}
+					});
+				},
+				{
+					root: null,
+					rootMargin: '0px',
+					threshold: 0.2,
+				}
+			);
+			observer.observe(ImageCardElement.current);
+			return () => {
+				observer.disconnect();
+			};
+		}
+	}, [ImageCardElement]);
+
 	return (
-		<div className='rounded overflow-hidden shadow-lg relative max-w-xs h-fit-content bg-white mb-2'>
+		<div
+			ref={ImageCardElement}
+			className='rounded shadow-lg relative max-w-xs overflow-hidden h-fit-content bg-white mb-2'>
 			<div className='px-2 py-2 bg-white bg-opacity-70 w-full flex justify-between'>
 				<div>
 					<FontAwesomeIcon icon={faEye} />
@@ -35,19 +62,25 @@ export default function ImageCard({ imageData }: ImageCardProps) {
 			<a href={imageData.pageURL} className='relative'>
 				{!imageLoaded && (
 					<div
-						className='bg-white flex justify-between items-center max-w-full'
+						className='bg-white flex justify-between items-center max-w-xs min-w-xs'
 						style={{
-							height: imageData.webformatHeight,
-							width: imageData.webformatWidth,
+							height: imageData.webformatHeight * (2 / 3),
 						}}>
 						<p className='text-center w-full'>Loading ...</p>
 					</div>
 				)}
 
 				<img
-					src={imageData.webformatURL}
+					ref={ImageElement}
+					src=''
 					alt='Image'
-					className={`max-w-full ${imageLoaded ? '' : 'hidden'}`}
+					style={{
+						height: imageData.webformatHeight * (2 / 3),
+						width: imageData.webformatWidth,
+					}}
+					className={`w-xs mx-auto object-cover ${
+						imageLoaded ? '' : 'hidden'
+					}`}
 					onLoad={handleImageLoad}
 				/>
 			</a>

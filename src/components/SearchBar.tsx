@@ -12,7 +12,7 @@ export default function SearchBar({ Search, term }: Props) {
 
 	return (
 		<form
-			className='border-b-2 border-gray-500 shadow-lg h-16 sticky mb-8 top-0 z-50 bg-white flex justify-center items-center px-4'
+			className='border-b-2 border-gray-500 shadow-lg h-16 sticky mb-4 top-0 z-50 bg-white flex justify-center items-center px-4'
 			onSubmit={(e) => {
 				e.preventDefault();
 				const SerachVal = (SearchInput.current as HTMLInputElement | null)
