@@ -1,18 +1,19 @@
-# PixBay Gallery [React Project]
+# React PixBay Gallery
+
 <div align="center">
     <img src="Screenshots\Pixbay-Gallery_2.png" />
 </div>
 
-A Image Gallery That fetches it's images from pixbay online free api
+Welcome to the React PixBay Gallery – a cool project that uses React to make a really awesome picture collection. All the pictures come from PixBay's free online API, giving you a neat way to check out different images.
 
-## Features
+## Cool Features
+Lazy Loading: Pictures load just when you need them, making things run super smooth.
+Dymamic Layout: The gallery looks good on any screen because it adapts to different sizes.
+Easy Search: Want something specific? Use the search to find just the right pictures from PixBay.
+Works Everywhere: Whether you're on your computer, tablet, or phone, the gallery looks good and is easy to use.
 
-- Lazy Loading Images
-- Dynamic Layout
-- Searching PixBay Thorw the Api
-- Responsive Design
-
-## Other Images
+# More Pictures
+Here are a couple more screenshots for you:
 
 <div align="center">
     <img src="Screenshots\Pixbay-Gallery_3.png" />
@@ -21,8 +22,9 @@ A Image Gallery That fetches it's images from pixbay online free api
     <img src="Screenshots\Pixbay-Gallery_1.png" />
 </div>
 
-## Notes
+# Notes
+Designed by: Magdy Kishk
+Coded by: Magdy Kishk
+Date: March 5, 2024
 
-- Design by Magdy Kishk
-- Code Writen by Magdy Kishk
-- Date: 5 of march 2024
+Have fun exploring all the cool images in the React PixBay Gallery!
