@@ -1,5 +1,7 @@
 # PixBay Gallery [React Project]
-![](.\Screenshots\Pixbay-Gallery_2.png)
+<div align="center">
+    <img src="Screenshots\Pixbay-Gallery_2.png" />
+</div>
 
 A Image Gallery That fetches it's images from pixbay online free api
 
@@ -12,8 +14,12 @@ A Image Gallery That fetches it's images from pixbay online free api
 
 ## Other Images
 
-![](.\Screenshots\Pixbay-Gallery_3.png)
-![](.\Screenshots\Pixbay-Gallery_1.png)
+<div align="center">
+    <img src="Screenshots\Pixbay-Gallery_3.png" />
+</div>
+<div align="center">
+    <img src="Screenshots\Pixbay-Gallery_1.png" />
+</div>
 
 ## Notes
 
